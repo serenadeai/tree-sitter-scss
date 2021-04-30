@@ -2573,6 +2573,7 @@
       "declaration"
     ]
   ],
+  "precedences": [],
   "externals": [
     {
       "type": "SYMBOL",
