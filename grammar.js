@@ -215,7 +215,7 @@ module.exports = grammar({
     universal_selector: ($) => "*",
 
     class_selector: ($) =>
-      prec(1, seq(optional($._selector), ".", alias($.identifier, $.class_name))),
+      prec(1, seq(optional($._selector), choice(".", $.nesting_selector), alias($.identifier, $.class_name))),
 
     pseudo_class_selector: ($) =>
       seq(
