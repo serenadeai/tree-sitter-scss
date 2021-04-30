@@ -1222,6 +1222,10 @@
           "named": true
         },
         {
+          "type": "class_selector",
+          "named": true
+        },
+        {
           "type": "color_value",
           "named": true
         },
