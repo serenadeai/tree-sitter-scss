@@ -61,7 +61,7 @@ module.exports = grammar({
 
     keyframes_statement: ($) =>
       seq(
-        choice("@keyframes", alias(/@[-a-z]+keyframes/, $.at_keyword)),
+        choice("@keyframes", field('at_keyword', /@[-a-z]+keyframes/)),
         alias($.identifier, $.keyframes_name),
         $.keyframe_block_list
       ),
@@ -90,13 +90,15 @@ module.exports = grammar({
       ),
 
     css_mixin: ($) =>
-      seq("@mixin", $.identifier, optional($.parameters), $.enclosed_body),
+      seq("@mixin", $.identifier, 
+      optional_with_placeholder('parameter_list_optional', $.parameters),
+      $.enclosed_body),
 
     css_include: ($) =>
       seq(
         "@include",
         $.identifier,
-        optional(alias($.include_arguments, $.arguments)),
+        optional_with_placeholder('argument_list_optional', $.include_arguments),
         choice($.enclosed_body, ";")
       ),
 
@@ -371,11 +373,13 @@ module.exports = grammar({
         seq($._value, choice("+", "-", "*", "/", "==", "<", ">", "!=", "<=", ">="), $._value)
       ),
 
-    arguments: ($) => seq(token.immediate("("), 
-    field('argument_list', 
-      sep(choice(",", ";"), repeat1($.argument))
-    ), 
-    ")"),
+    arguments: ($) => seq(
+      token.immediate("("), 
+      optional_with_placeholder('argument_list', 
+        sep(choice(",", ";"), repeat1($.argument))
+      ), 
+      ")"
+    ),
     
     argument: $ => $._value, 
 

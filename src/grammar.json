@@ -276,13 +276,12 @@
               "value": "@keyframes"
             },
             {
-              "type": "ALIAS",
+              "type": "FIELD",
+              "name": "at_keyword",
               "content": {
                 "type": "PATTERN",
                 "value": "@[-a-z]+keyframes"
-              },
-              "named": true,
-              "value": "at_keyword"
+              }
             }
           ]
         },
@@ -558,11 +557,19 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "parameters"
+              "type": "FIELD",
+              "name": "parameter_list_optional",
+              "content": {
+                "type": "SYMBOL",
+                "name": "parameters"
+              }
             },
             {
-              "type": "BLANK"
+              "type": "FIELD",
+              "name": "parameter_list_optional",
+              "content": {
+                "type": "BLANK"
+              }
             }
           ]
         },
@@ -587,16 +594,19 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "ALIAS",
+              "type": "FIELD",
+              "name": "argument_list_optional",
               "content": {
                 "type": "SYMBOL",
                 "name": "include_arguments"
-              },
-              "named": true,
-              "value": "arguments"
+              }
             },
             {
-              "type": "BLANK"
+              "type": "FIELD",
+              "name": "argument_list_optional",
+              "content": {
+                "type": "BLANK"
+              }
             }
           ]
         },
@@ -2442,56 +2452,68 @@
           }
         },
         {
-          "type": "FIELD",
-          "name": "argument_list",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SEQ",
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "argument_list",
+              "content": {
+                "type": "CHOICE",
                 "members": [
                   {
-                    "type": "REPEAT1",
-                    "content": {
-                      "type": "SYMBOL",
-                      "name": "argument"
-                    }
-                  },
-                  {
-                    "type": "REPEAT",
-                    "content": {
-                      "type": "SEQ",
-                      "members": [
-                        {
-                          "type": "CHOICE",
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "REPEAT1",
+                        "content": {
+                          "type": "SYMBOL",
+                          "name": "argument"
+                        }
+                      },
+                      {
+                        "type": "REPEAT",
+                        "content": {
+                          "type": "SEQ",
                           "members": [
                             {
-                              "type": "STRING",
-                              "value": ","
+                              "type": "CHOICE",
+                              "members": [
+                                {
+                                  "type": "STRING",
+                                  "value": ","
+                                },
+                                {
+                                  "type": "STRING",
+                                  "value": ";"
+                                }
+                              ]
                             },
                             {
-                              "type": "STRING",
-                              "value": ";"
+                              "type": "REPEAT1",
+                              "content": {
+                                "type": "SYMBOL",
+                                "name": "argument"
+                              }
                             }
                           ]
-                        },
-                        {
-                          "type": "REPEAT1",
-                          "content": {
-                            "type": "SYMBOL",
-                            "name": "argument"
-                          }
                         }
-                      ]
-                    }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "BLANK"
                   }
                 ]
-              },
-              {
+              }
+            },
+            {
+              "type": "FIELD",
+              "name": "argument_list",
+              "content": {
                 "type": "BLANK"
               }
-            ]
-          }
+            }
+          ]
         },
         {
           "type": "STRING",

@@ -914,15 +914,22 @@
   {
     "type": "css_include",
     "named": true,
-    "fields": {},
+    "fields": {
+      "argument_list_optional": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "include_arguments",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "arguments",
-          "named": true
-        },
         {
           "type": "enclosed_body",
           "named": true
@@ -937,7 +944,18 @@
   {
     "type": "css_mixin",
     "named": true,
-    "fields": {},
+    "fields": {
+      "parameter_list_optional": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "parameters",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -948,10 +966,6 @@
         },
         {
           "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "parameters",
           "named": true
         }
       ]
@@ -1897,6 +1911,26 @@
     }
   },
   {
+    "type": "include_arguments",
+    "named": true,
+    "fields": {
+      "argument_list": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "argument",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "integer_value",
     "named": true,
     "fields": {},
@@ -1965,10 +1999,6 @@
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "at_keyword",
-          "named": true
-        },
         {
           "type": "keyframe_block_list",
           "named": true
