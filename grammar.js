@@ -12,10 +12,7 @@ module.exports = grammar({
   ],
 
   rules: {
-    program: ($) => optional_with_placeholder(
-      'statement_list', 
-      repeat($.statement)
-    ),
+    program: ($) => optional_with_placeholder("statement_list", repeat($.statement)),
 
     statement: ($) =>
       choice(
@@ -61,7 +58,7 @@ module.exports = grammar({
 
     keyframes_statement: ($) =>
       seq(
-        choice("@keyframes", field('at_keyword', /@[-a-z]+keyframes/)),
+        choice("@keyframes", field("at_keyword", /@[-a-z]+keyframes/)),
         alias($.identifier, $.keyframes_name),
         $.keyframe_block_list
       ),
@@ -81,7 +78,7 @@ module.exports = grammar({
 
     forward_statement: ($) => seq("@forward", $._value, ";"),
 
-    parameters: ($) => seq("(", field('parameter_list', sep1(",", $.parameter)), ")"),
+    parameters: ($) => seq("(", field("parameter_list", sep1(",", $.parameter)), ")"),
 
     parameter: ($) =>
       seq(
@@ -90,22 +87,25 @@ module.exports = grammar({
       ),
 
     css_mixin: ($) =>
-      seq("@mixin", $.identifier, 
-      optional_with_placeholder('parameter_list_optional', $.parameters),
-      $.enclosed_body),
+      seq(
+        "@mixin",
+        $.identifier,
+        optional_with_placeholder("parameter_list_optional", $.parameters),
+        $.enclosed_body
+      ),
 
     css_include: ($) =>
       seq(
         "@include",
         $.identifier,
-        optional_with_placeholder('argument_list_optional', $.include_arguments),
+        optional_with_placeholder("argument_list_optional", $.include_arguments),
         choice($.enclosed_body, ";")
       ),
 
     include_arguments: ($) =>
       seq(
         token.immediate("("),
-        field('argument_list', sep1(",", alias($.include_argument, $.argument))),
+        field("argument_list", sep1(",", alias($.include_argument, $.argument))),
         token.immediate(")")
       ),
 
@@ -119,11 +119,12 @@ module.exports = grammar({
 
     extend_statement: ($) => seq("@extend", choice($._value, $.class_selector), ";"),
 
-    if: ($) => seq(
-      $.if_clause, 
-      optional_with_placeholder('else_if_clause_list', repeat($.else_if_clause)), 
-      optional_with_placeholder('else_clause_optional', $.else_clause)
-    ),
+    if: ($) =>
+      seq(
+        $.if_clause,
+        optional_with_placeholder("else_if_clause_list", repeat($.else_if_clause)),
+        optional_with_placeholder("else_clause_optional", $.else_clause)
+      ),
 
     if_clause: ($) => seq("@if", alias($._value, $.condition), $.enclosed_body),
 
@@ -174,39 +175,43 @@ module.exports = grammar({
     css_selector_list: ($) => sep1(",", $._selector),
 
     enclosed_body: ($) =>
-      seq("{", 
-      optional_with_placeholder('statement_list', seq(
-        repeat($.block_item),
-        optional(alias($.last_declaration, $.declaration))
-      )), 
-      "}"
-    ),
+      seq(
+        "{",
+        optional_with_placeholder(
+          "statement_list",
+          seq(repeat($.block_item), optional(alias($.last_declaration, $.declaration)))
+        ),
+        "}"
+      ),
 
     block_item: ($) =>
-      field('statement', choice(
-        $.declaration,
-        $.css_ruleset,
-        $.import_statement,
-        $.media_statement,
-        $.charset_statement,
-        $.namespace_statement,
-        $.keyframes_statement,
-        $.supports_statement,
-        $.css_mixin,
-        $.css_include,
-        $.extend_statement,
-        $.if,
-        $.each_statement,
-        $.for_statement,
-        $.while_statement,
-        $.function_statement,
-        $.return_statement,
-        $.at_root_statement,
-        $.error_statement,
-        $.warn_statement,
-        $.debug_statement,
-        $.at_rule
-      )),
+      field(
+        "statement",
+        choice(
+          $.declaration,
+          $.css_ruleset,
+          $.import_statement,
+          $.media_statement,
+          $.charset_statement,
+          $.namespace_statement,
+          $.keyframes_statement,
+          $.supports_statement,
+          $.css_mixin,
+          $.css_include,
+          $.extend_statement,
+          $.if,
+          $.each_statement,
+          $.for_statement,
+          $.while_statement,
+          $.function_statement,
+          $.return_statement,
+          $.at_root_statement,
+          $.error_statement,
+          $.warn_statement,
+          $.debug_statement,
+          $.at_rule
+        )
+      ),
 
     // Selectors
 
@@ -232,17 +237,24 @@ module.exports = grammar({
     universal_selector: ($) => "*",
 
     class_selector: ($) =>
-      prec(1, field('css_selector', seq(optional($._selector), choice(".", $.nesting_selector), $.identifier))),
+      prec(
+        1,
+        field(
+          "css_selector",
+          seq(optional($._selector), choice(".", $.nesting_selector), $.identifier)
+        )
+      ),
 
     pseudo_class_selector: ($) =>
-    field('css_selector',
-      seq(
-        optional($._selector),
-        ":",
-        alias($.identifier, $.class_name),
-        optional(alias($.pseudo_class_arguments, $.arguments))
-      )
-    ),
+      field(
+        "css_selector",
+        seq(
+          optional($._selector),
+          ":",
+          alias($.identifier, $.class_name),
+          optional(alias($.pseudo_class_arguments, $.arguments))
+        )
+      ),
 
     pseudo_element_selector: ($) =>
       seq(optional($._selector), "::", alias($.identifier, $.tag_name)),
@@ -258,7 +270,7 @@ module.exports = grammar({
         "]"
       ),
 
-    child_selector: ($) => prec.left(field('css_selector', seq($._selector, ">", $._selector))),
+    child_selector: ($) => prec.left(field("css_selector", seq($._selector, ">", $._selector))),
 
     descendant_selector: ($) => prec.left(seq($._selector, $._descendant_operator, $._selector)),
 
@@ -271,27 +283,19 @@ module.exports = grammar({
 
     // Declarations
 
-    declaration: ($) =>
-      seq(
-        field('key_value_pair', $.declaration_pair),
-        ";"
-      ),
-    
-    declaration_pair: $ => seq(
-      field('key_value_pair_key', choice($.variable_identifier, $.identifier)), 
-      ":", 
-      field('key_value_pair_value', seq(
-        $._value,
-        repeat(seq(optional(","), $._value)),
-        optional($.important),
-      ))
-    ),
+    declaration: ($) => seq(field("key_value_pair", $.declaration_pair), ";"),
 
-    last_declaration: ($) =>
-      prec(
-        1,
-        field('key_value_pair', $.declaration_pair)
+    declaration_pair: ($) =>
+      seq(
+        field("key_value_pair_key", choice($.variable_identifier, $.identifier)),
+        ":",
+        field(
+          "key_value_pair_value",
+          seq($._value, repeat(seq(optional(","), $._value)), optional($.important))
+        )
       ),
+
+    last_declaration: ($) => prec(1, field("key_value_pair", $.declaration_pair)),
 
     important: ($) => "!important",
 
@@ -344,7 +348,7 @@ module.exports = grammar({
     string_value: ($) =>
       token(choice(seq("'", /([^'\n]|\\(.|\n))*/, "'"), seq('"', /([^"\n]|\\(.|\n))*/, '"'))),
 
-    integer: $ => token(seq(optional(choice("+", "-")), /\d+/)), 
+    integer: ($) => token(seq(optional(choice("+", "-")), /\d+/)),
 
     integer_value: ($) => seq($.integer, optional($.unit)),
 
@@ -373,15 +377,14 @@ module.exports = grammar({
         seq($._value, choice("+", "-", "*", "/", "==", "<", ">", "!=", "<=", ">="), $._value)
       ),
 
-    arguments: ($) => seq(
-      token.immediate("("), 
-      optional_with_placeholder('argument_list', 
-        sep(choice(",", ";"), repeat1($.argument))
-      ), 
-      ")"
-    ),
-    
-    argument: $ => $._value, 
+    arguments: ($) =>
+      seq(
+        token.immediate("("),
+        optional_with_placeholder("argument_list", sep(choice(",", ";"), repeat1($.argument))),
+        ")"
+      ),
+
+    argument: ($) => $._value,
 
     identifier: ($) =>
       /((#\{[a-zA-Z0-9-_,&\$\.\(\) ]*\})|[a-zA-Z-_])([a-zA-Z0-9-_]|(#\{[a-zA-Z0-9-_,&\$\.\(\) ]*\}))*/,
@@ -424,5 +427,5 @@ function sep1(separator, rule) {
 }
 
 function optional_with_placeholder(field_name, rule) {
-  return choice(field(field_name, rule), field(field_name, blank()))
+  return choice(field(field_name, rule), field(field_name, blank()));
 }
