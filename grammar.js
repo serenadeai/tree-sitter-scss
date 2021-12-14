@@ -1,20 +1,19 @@
 module.exports = grammar({
-  name: "scss",
+  name: 'scss',
 
-  extras: ($) => [/\s/, $.comment, $.line_comment],
+  extras: $ => [/\s/, $.comment, $.line_comment],
 
-  externals: ($) => [$._descendant_operator],
+  externals: $ => [$._descendant_operator],
 
-  conflicts: ($) => [[$._selector, $.declaration_pair]],
+  conflicts: $ => [[$._selector, $.declaration_pair]],
 
-  inline: ($) => [
-    // $._block_item
-  ],
+  inline: $ => [],
 
   rules: {
-    program: ($) => optional_with_placeholder("statement_list", repeat($.statement)),
+    program: $ =>
+      optional_with_placeholder('statement_list', repeat($.statement)),
 
-    statement: ($) =>
+    statement: $ =>
       choice(
         $.declaration,
         $.css_ruleset,
@@ -42,151 +41,168 @@ module.exports = grammar({
 
     // Statements
 
-    import_statement: ($) => seq("@import", $._value, sep(",", $._query), ";"),
+    import_statement: $ => seq('@import', $.value_, sep(',', $._query), ';'),
 
-    media_statement: ($) => seq("@media", sep1(",", $._query), $.enclosed_body),
+    media_statement: $ => seq('@media', sep1(',', $._query), $.enclosed_body),
 
-    charset_statement: ($) => seq("@charset", $._value, ";"),
+    charset_statement: $ => seq('@charset', $.value_, ';'),
 
-    namespace_statement: ($) =>
+    namespace_statement: $ =>
       seq(
-        "@namespace",
+        '@namespace',
         optional(alias($.identifier, $.namespace_name)),
         choice($.string_value, $.call_expression),
-        ";"
+        ';'
       ),
 
-    keyframes_statement: ($) =>
+    keyframes_statement: $ =>
       seq(
-        choice("@keyframes", field("at_keyword", /@[-a-z]+keyframes/)),
+        choice('@keyframes', field('at_keyword', /@[-a-z]+keyframes/)),
         alias($.identifier, $.keyframes_name),
         $.keyframe_block_list
       ),
 
-    keyframe_block_list: ($) => seq("{", repeat($.keyframe_block), "}"),
+    keyframe_block_list: $ => seq('{', repeat($.keyframe_block), '}'),
 
-    keyframe_block: ($) => seq(choice($.from, $.to, $.integer_value), $.enclosed_body),
+    keyframe_block: $ =>
+      seq(choice($.from, $.to, $.integer_value), $.enclosed_body),
 
-    from: ($) => "from",
-    to: ($) => "to",
+    from: $ => 'from',
+    to: $ => 'to',
 
-    supports_statement: ($) => seq("@supports", $._query, $.enclosed_body),
+    supports_statement: $ => seq('@supports', $._query, $.enclosed_body),
 
-    at_rule: ($) => seq($.at_keyword, sep(",", $._query), choice(";", $.enclosed_body)),
+    at_rule: $ =>
+      seq($.at_keyword, sep(',', $._query), choice(';', $.enclosed_body)),
 
-    use_statement: ($) => seq("@use", $._value, ";"),
+    use_statement: $ => seq('@use', $.value_, ';'),
 
-    forward_statement: ($) => seq("@forward", $._value, ";"),
+    forward_statement: $ => seq('@forward', $.value_, ';'),
 
-    parameters: ($) => seq("(", field("parameter_list", sep1(",", $.parameter)), ")"),
+    parameters: $ =>
+      seq('(', field('parameter_list', sep1(',', $.parameter)), ')'),
 
-    parameter: ($) =>
+    parameter: $ =>
       seq(
         alias($.variable_identifier, $.variable_name),
-        optional(seq(":", alias($._value, $.default_value)))
+        optional(seq(':', alias($.value_, $.default_value)))
       ),
 
-    css_mixin: ($) =>
+    css_mixin: $ =>
       seq(
-        "@mixin",
+        '@mixin',
         $.identifier,
-        optional_with_placeholder("parameter_list_optional", $.parameters),
+        optional_with_placeholder('parameter_list_optional', $.parameters),
         $.enclosed_body
       ),
 
-    css_include: ($) =>
+    css_include: $ =>
       seq(
-        "@include",
+        '@include',
         $.identifier,
-        optional_with_placeholder("argument_list_optional", $.include_arguments),
-        choice($.enclosed_body, ";")
+        optional_with_placeholder(
+          'argument_list_optional',
+          $.include_arguments
+        ),
+        choice($.enclosed_body, ';')
       ),
 
-    include_arguments: ($) =>
+    include_arguments: $ =>
       seq(
-        token.immediate("("),
-        field("argument_list", sep1(",", alias($.include_argument, $.argument))),
-        token.immediate(")")
+        token.immediate('('),
+        field(
+          'argument_list',
+          sep1(',', alias($.include_argument, $.argument))
+        ),
+        token.immediate(')')
       ),
 
-    include_argument: ($) =>
+    include_argument: $ =>
       seq(
-        optional(seq(alias($.variable_identifier, $.argument_name), ":")),
-        alias($._value, $.argument_value)
+        optional(seq(alias($.variable_identifier, $.argument_name), ':')),
+        alias($.value_, $.argument_value)
       ),
 
-    placeholder: ($) => seq("%", $.identifier, $.enclosed_body),
+    placeholder: $ => seq('%', $.identifier, $.enclosed_body),
 
-    extend_statement: ($) => seq("@extend", choice($._value, $.class_selector), ";"),
+    extend_statement: $ =>
+      seq('@extend', choice($.value_, $.class_selector), ';'),
 
-    if: ($) =>
+    if: $ =>
       seq(
         $.if_clause,
-        optional_with_placeholder("else_if_clause_list", repeat($.else_if_clause)),
-        optional_with_placeholder("else_clause_optional", $.else_clause)
+        optional_with_placeholder(
+          'else_if_clause_list',
+          repeat($.else_if_clause)
+        ),
+        optional_with_placeholder('else_clause_optional', $.else_clause)
       ),
 
-    if_clause: ($) => seq("@if", alias($._value, $.condition), $.enclosed_body),
+    if_clause: $ => seq('@if', alias($.value_, $.condition), $.enclosed_body),
 
-    else_if_clause: ($) => seq("@else", "if", alias($._value, $.condition), $.enclosed_body),
+    else_if_clause: $ =>
+      seq('@else', 'if', alias($.value_, $.condition), $.enclosed_body),
 
-    else_clause: ($) => seq("@else", $.enclosed_body),
+    else_clause: $ => seq('@else', $.enclosed_body),
 
-    each_statement: ($) =>
+    each_statement: $ =>
       seq(
-        "@each",
-        optional(seq(alias($.variable_identifier, $.key), ",")),
+        '@each',
+        optional(seq(alias($.variable_identifier, $.key), ',')),
         alias($.variable_identifier, $.value),
-        "in",
-        $._value,
+        'in',
+        $.value_,
         $.enclosed_body
       ),
 
-    for_statement: ($) =>
+    for_statement: $ =>
       seq(
-        "@for",
+        '@for',
         alias($.variable_identifier, $.variable),
-        "from",
-        alias($._value, $.from),
-        "through",
-        alias($._value, $.through),
+        'from',
+        alias($.value_, $.from),
+        'through',
+        alias($.value_, $.through),
         $.enclosed_body
       ),
 
-    while_statement: ($) => seq("@while", $._value, $.enclosed_body),
+    while_statement: $ => seq('@while', $.value_, $.enclosed_body),
 
-    function_statement: ($) =>
-      seq("@function", $.identifier, optional($.parameters), $.enclosed_body),
+    function_statement: $ =>
+      seq('@function', $.identifier, optional($.parameters), $.enclosed_body),
 
-    return_statement: ($) => seq("@return", $._value, ";"),
+    return_statement: $ => seq('@return', $.value_, ';'),
 
-    at_root_statement: ($) => seq("@at-root", $._value, $.enclosed_body),
+    at_root_statement: $ => seq('@at-root', $.value_, $.enclosed_body),
 
-    error_statement: ($) => seq("@error", $._value, ";"),
+    error_statement: $ => seq('@error', $.value_, ';'),
 
-    warn_statement: ($) => seq("@warn", $._value, ";"),
+    warn_statement: $ => seq('@warn', $.value_, ';'),
 
-    debug_statement: ($) => seq("@debug", $._value, ";"),
+    debug_statement: $ => seq('@debug', $.value_, ';'),
 
     // Rule sets
 
-    css_ruleset: ($) => seq($.css_selector_list, $.enclosed_body),
+    css_ruleset: $ => seq($.css_selector_list, $.enclosed_body),
 
-    css_selector_list: ($) => sep1(",", $._selector),
+    css_selector_list: $ => sep1(',', $._selector),
 
-    enclosed_body: ($) =>
+    enclosed_body: $ =>
       seq(
-        "{",
+        '{',
         optional_with_placeholder(
-          "statement_list",
-          seq(repeat($.block_item), optional(alias($.last_declaration, $.declaration)))
+          'statement_list',
+          seq(
+            repeat($.block_item),
+            optional(alias($.last_declaration, $.declaration))
+          )
         ),
-        "}"
+        '}'
       ),
 
-    block_item: ($) =>
+    block_item: $ =>
       field(
-        "statement",
+        'statement',
         choice(
           $.declaration,
           $.css_ruleset,
@@ -215,7 +231,7 @@ module.exports = grammar({
 
     // Selectors
 
-    _selector: ($) =>
+    _selector: $ =>
       choice(
         $.universal_selector,
         alias($.identifier, $.tag_name),
@@ -232,76 +248,95 @@ module.exports = grammar({
         $.adjacent_sibling_selector
       ),
 
-    nesting_selector: ($) => "&",
+    nesting_selector: $ => '&',
 
-    universal_selector: ($) => "*",
+    universal_selector: $ => '*',
 
-    class_selector: ($) =>
+    class_selector: $ =>
       prec(
         1,
         field(
-          "css_selector",
-          seq(optional($._selector), choice(".", $.nesting_selector), $.identifier)
+          'css_selector',
+          seq(
+            optional($._selector),
+            choice('.', $.nesting_selector),
+            $.identifier
+          )
         )
       ),
 
-    pseudo_class_selector: ($) =>
+    pseudo_class_selector: $ =>
       field(
-        "css_selector",
+        'css_selector',
         seq(
           optional($._selector),
-          ":",
+          ':',
           alias($.identifier, $.class_name),
           optional(alias($.pseudo_class_arguments, $.arguments))
         )
       ),
 
-    pseudo_element_selector: ($) =>
-      seq(optional($._selector), "::", alias($.identifier, $.tag_name)),
+    pseudo_element_selector: $ =>
+      seq(optional($._selector), '::', alias($.identifier, $.tag_name)),
 
-    id_selector: ($) => seq(optional($._selector), "#", alias($.identifier, $.id_name)),
+    id_selector: $ =>
+      seq(optional($._selector), '#', alias($.identifier, $.id_name)),
 
-    attribute_selector: ($) =>
+    attribute_selector: $ =>
       seq(
         optional($._selector),
-        "[",
+        '[',
         alias($.identifier, $.attribute_name),
-        optional(seq(choice("=", "~=", "^=", "|=", "*=", "$="), $._value)),
-        "]"
+        optional(seq(choice('=', '~=', '^=', '|=', '*=', '$='), $.value_)),
+        ']'
       ),
 
-    child_selector: ($) => prec.left(field("css_selector", seq($._selector, ">", $._selector))),
+    child_selector: $ =>
+      prec.left(field('css_selector', seq($._selector, '>', $._selector))),
 
-    descendant_selector: ($) => prec.left(seq($._selector, $._descendant_operator, $._selector)),
+    descendant_selector: $ =>
+      prec.left(seq($._selector, $._descendant_operator, $._selector)),
 
-    sibling_selector: ($) => prec.left(seq($._selector, "~", $._selector)),
+    sibling_selector: $ => prec.left(seq($._selector, '~', $._selector)),
 
-    adjacent_sibling_selector: ($) => prec.left(seq($._selector, "+", $._selector)),
+    adjacent_sibling_selector: $ =>
+      prec.left(seq($._selector, '+', $._selector)),
 
-    pseudo_class_arguments: ($) =>
-      seq(token.immediate("("), sep(",", choice($._selector, repeat1($._value))), ")"),
+    pseudo_class_arguments: $ =>
+      seq(
+        token.immediate('('),
+        sep(',', choice($._selector, repeat1($.value_))),
+        ')'
+      ),
 
     // Declarations
 
-    declaration: ($) => seq(field("key_value_pair", $.declaration_pair), ";"),
+    declaration: $ => seq(field('key_value_pair', $.declaration_pair), ';'),
 
-    declaration_pair: ($) =>
+    declaration_pair: $ =>
       seq(
-        field("key_value_pair_key", choice($.variable_identifier, $.identifier)),
-        ":",
         field(
-          "key_value_pair_value",
-          seq($._value, repeat(seq(optional(","), $._value)), optional($.important))
+          'key_value_pair_key',
+          choice($.variable_identifier, $.identifier)
+        ),
+        ':',
+        field(
+          'key_value_pair_value',
+          seq(
+            $.value_,
+            repeat(seq(optional(','), $.value_)),
+            optional($.important)
+          )
         )
       ),
 
-    last_declaration: ($) => prec(1, field("key_value_pair", $.declaration_pair)),
+    last_declaration: $ => prec(1, field('key_value_pair', $.declaration_pair)),
 
-    important: ($) => "!important",
+    important: $ => '!important',
 
     // Media queries
 
-    _query: ($) =>
+    _query: $ =>
       choice(
         alias($.identifier, $.keyword_query),
         $.feature_query,
@@ -311,24 +346,30 @@ module.exports = grammar({
         $.parenthesized_query
       ),
 
-    feature_query: ($) =>
-      seq("(", alias($.identifier, $.feature_name), ":", repeat1($._value), ")"),
+    feature_query: $ =>
+      seq(
+        '(',
+        alias($.identifier, $.feature_name),
+        ':',
+        repeat1($.value_),
+        ')'
+      ),
 
-    parenthesized_query: ($) => seq("(", $._query, ")"),
+    parenthesized_query: $ => seq('(', $._query, ')'),
 
-    binary_query: ($) => prec.left(seq($._query, choice("and", "or"), $._query)),
+    binary_query: $ => prec.left(seq($._query, choice('and', 'or'), $._query)),
 
-    unary_query: ($) => prec(1, seq(choice("not", "only"), $._query)),
+    unary_query: $ => prec(1, seq(choice('not', 'only'), $._query)),
 
-    selector_query: ($) => seq("selector", "(", $._selector, ")"),
+    selector_query: $ => seq('selector', '(', $._selector, ')'),
 
     // Property Values
 
-    _value: ($) =>
+    value_: $ =>
       prec(
         -1,
         choice(
-          alias($.identifier, $.plain_value),
+          alias($.identifier, $.plain_value_),
           alias($.variable_identifier, $.variable_value),
           $.plain_value,
           $.color_value,
@@ -341,63 +382,76 @@ module.exports = grammar({
         )
       ),
 
-    parenthesized_value: ($) => seq("(", $._value, ")"),
+    parenthesized_value: $ => seq('(', $.value_, ')'),
 
-    color_value: ($) => seq("#", token.immediate(/[0-9a-fA-F]{3,8}/)),
+    color_value: $ => seq('#', token.immediate(/[0-9a-fA-F]{3,8}/)),
 
-    string_value: ($) =>
-      token(choice(seq("'", /([^'\n]|\\(.|\n))*/, "'"), seq('"', /([^"\n]|\\(.|\n))*/, '"'))),
+    string_value: $ =>
+      token(
+        choice(
+          seq("'", /([^'\n]|\\(.|\n))*/, "'"),
+          seq('"', /([^"\n]|\\(.|\n))*/, '"')
+        )
+      ),
 
-    integer: ($) => token(seq(optional(choice("+", "-")), /\d+/)),
+    integer: $ => token(seq(optional(choice('+', '-')), /\d+/)),
 
-    integer_value: ($) => seq($.integer, optional($.unit)),
+    integer_value: $ => seq($.integer, optional($.unit)),
 
-    float_value: ($) =>
+    float_value: $ =>
       seq(
         token(
           seq(
-            optional(choice("+", "-")),
+            optional(choice('+', '-')),
             /\d*/,
             choice(
-              seq(".", /\d+/),
-              seq(/[eE]/, optional("-"), /\d+/),
-              seq(".", /\d+/, /[eE]/, optional("-"), /\d+/)
+              seq('.', /\d+/),
+              seq(/[eE]/, optional('-'), /\d+/),
+              seq('.', /\d+/, /[eE]/, optional('-'), /\d+/)
             )
           )
         ),
         optional($.unit)
       ),
 
-    unit: ($) => token.immediate(/[a-zA-Z%]+/),
+    unit: $ => token.immediate(/[a-zA-Z%]+/),
 
-    call_expression: ($) => seq(alias($.identifier, $.function_name), $.arguments),
+    call_expression: $ =>
+      seq(alias($.identifier, $.function_name), $.arguments),
 
-    binary_expression: ($) =>
+    binary_expression: $ =>
       prec.left(
-        seq($._value, choice("+", "-", "*", "/", "==", "<", ">", "!=", "<=", ">="), $._value)
+        seq(
+          $.value_,
+          choice('+', '-', '*', '/', '==', '<', '>', '!=', '<=', '>='),
+          $.value_
+        )
       ),
 
-    arguments: ($) =>
+    arguments: $ =>
       seq(
-        token.immediate("("),
-        optional_with_placeholder("argument_list", sep(choice(",", ";"), repeat1($.argument))),
-        ")"
+        token.immediate('('),
+        optional_with_placeholder(
+          'argument_list',
+          sep(choice(',', ';'), repeat1($.argument))
+        ),
+        ')'
       ),
 
-    argument: ($) => $._value,
+    argument: $ => $.value_,
 
-    identifier: ($) =>
+    identifier: $ =>
       /((#\{[a-zA-Z0-9-_,&\$\.\(\) ]*\})|[a-zA-Z-_])([a-zA-Z0-9-_]|(#\{[a-zA-Z0-9-_,&\$\.\(\) ]*\}))*/,
 
-    variable_identifier: ($) => /([a-zA-Z_]+\.)?\$[a-zA-Z-_][a-zA-Z0-9-_]*/,
+    variable_identifier: $ => /([a-zA-Z_]+\.)?\$[a-zA-Z-_][a-zA-Z0-9-_]*/,
 
-    at_keyword: ($) => /@[a-zA-Z-_]+/,
+    at_keyword: $ => /@[a-zA-Z-_]+/,
 
-    comment: ($) => token(seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/")),
+    comment: $ => token(seq('/*', /[^*]*\*+([^/*][^*]*\*+)*/, '/')),
 
-    line_comment: ($) => token(seq("//", /.*/)),
+    line_comment: $ => token(seq('//', /.*/)),
 
-    plain_value: ($) =>
+    plain_value: $ =>
       token(
         seq(
           repeat(
@@ -416,16 +470,16 @@ module.exports = grammar({
         )
       ),
   },
-});
+})
 
 function sep(separator, rule) {
-  return optional(sep1(separator, rule));
+  return optional(sep1(separator, rule))
 }
 
 function sep1(separator, rule) {
-  return seq(rule, repeat(seq(separator, rule)));
+  return seq(rule, repeat(seq(separator, rule)))
 }
 
 function optional_with_placeholder(field_name, rule) {
-  return choice(field(field_name, rule), field(field_name, blank()));
+  return choice(field(field_name, rule), field(field_name, blank()))
 }

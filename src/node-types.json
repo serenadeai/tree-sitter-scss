@@ -79,39 +79,7 @@
           "named": true
         },
         {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "call_expression",
-          "named": true
-        },
-        {
-          "type": "color_value",
-          "named": true
-        },
-        {
-          "type": "float_value",
-          "named": true
-        },
-        {
-          "type": "integer_value",
-          "named": true
-        },
-        {
-          "type": "parenthesized_value",
-          "named": true
-        },
-        {
-          "type": "plain_value",
-          "named": true
-        },
-        {
-          "type": "string_value",
-          "named": true
-        },
-        {
-          "type": "variable_value",
+          "type": "value_",
           "named": true
         }
       ]
@@ -151,6 +119,10 @@
         },
         {
           "type": "plain_value",
+          "named": true
+        },
+        {
+          "type": "plain_value_",
           "named": true
         },
         {
@@ -200,14 +172,6 @@
           "named": true
         },
         {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "call_expression",
-          "named": true
-        },
-        {
           "type": "child_selector",
           "named": true
         },
@@ -216,15 +180,7 @@
           "named": true
         },
         {
-          "type": "color_value",
-          "named": true
-        },
-        {
           "type": "descendant_selector",
-          "named": true
-        },
-        {
-          "type": "float_value",
           "named": true
         },
         {
@@ -232,19 +188,7 @@
           "named": true
         },
         {
-          "type": "integer_value",
-          "named": true
-        },
-        {
           "type": "nesting_selector",
-          "named": true
-        },
-        {
-          "type": "parenthesized_value",
-          "named": true
-        },
-        {
-          "type": "plain_value",
           "named": true
         },
         {
@@ -272,7 +216,7 @@
           "named": true
         },
         {
-          "type": "variable_value",
+          "type": "value_",
           "named": true
         }
       ]
@@ -287,43 +231,11 @@
       "required": true,
       "types": [
         {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "call_expression",
-          "named": true
-        },
-        {
-          "type": "color_value",
-          "named": true
-        },
-        {
           "type": "enclosed_body",
           "named": true
         },
         {
-          "type": "float_value",
-          "named": true
-        },
-        {
-          "type": "integer_value",
-          "named": true
-        },
-        {
-          "type": "parenthesized_value",
-          "named": true
-        },
-        {
-          "type": "plain_value",
-          "named": true
-        },
-        {
-          "type": "string_value",
-          "named": true
-        },
-        {
-          "type": "variable_value",
+          "type": "value_",
           "named": true
         }
       ]
@@ -393,14 +305,6 @@
           "named": true
         },
         {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "call_expression",
-          "named": true
-        },
-        {
           "type": "child_selector",
           "named": true
         },
@@ -409,15 +313,7 @@
           "named": true
         },
         {
-          "type": "color_value",
-          "named": true
-        },
-        {
           "type": "descendant_selector",
-          "named": true
-        },
-        {
-          "type": "float_value",
           "named": true
         },
         {
@@ -425,19 +321,7 @@
           "named": true
         },
         {
-          "type": "integer_value",
-          "named": true
-        },
-        {
           "type": "nesting_selector",
-          "named": true
-        },
-        {
-          "type": "parenthesized_value",
-          "named": true
-        },
-        {
-          "type": "plain_value",
           "named": true
         },
         {
@@ -465,7 +349,7 @@
           "named": true
         },
         {
-          "type": "variable_value",
+          "type": "value_",
           "named": true
         }
       ]
@@ -480,39 +364,7 @@
       "required": true,
       "types": [
         {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "call_expression",
-          "named": true
-        },
-        {
-          "type": "color_value",
-          "named": true
-        },
-        {
-          "type": "float_value",
-          "named": true
-        },
-        {
-          "type": "integer_value",
-          "named": true
-        },
-        {
-          "type": "parenthesized_value",
-          "named": true
-        },
-        {
-          "type": "plain_value",
-          "named": true
-        },
-        {
-          "type": "string_value",
-          "named": true
-        },
-        {
-          "type": "variable_value",
+          "type": "value_",
           "named": true
         }
       ]
@@ -681,39 +533,7 @@
       "required": true,
       "types": [
         {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "call_expression",
-          "named": true
-        },
-        {
-          "type": "color_value",
-          "named": true
-        },
-        {
-          "type": "float_value",
-          "named": true
-        },
-        {
-          "type": "integer_value",
-          "named": true
-        },
-        {
-          "type": "parenthesized_value",
-          "named": true
-        },
-        {
-          "type": "plain_value",
-          "named": true
-        },
-        {
-          "type": "string_value",
-          "named": true
-        },
-        {
-          "type": "variable_value",
+          "type": "value_",
           "named": true
         }
       ]
@@ -901,6 +721,10 @@
           "named": true
         },
         {
+          "type": "plain_value_",
+          "named": true
+        },
+        {
           "type": "string_value",
           "named": true
         },
@@ -1062,39 +886,7 @@
       "required": true,
       "types": [
         {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "call_expression",
-          "named": true
-        },
-        {
-          "type": "color_value",
-          "named": true
-        },
-        {
-          "type": "float_value",
-          "named": true
-        },
-        {
-          "type": "integer_value",
-          "named": true
-        },
-        {
-          "type": "parenthesized_value",
-          "named": true
-        },
-        {
-          "type": "plain_value",
-          "named": true
-        },
-        {
-          "type": "string_value",
-          "named": true
-        },
-        {
-          "type": "variable_value",
+          "type": "value_",
           "named": true
         }
       ]
@@ -1143,43 +935,11 @@
             "named": false
           },
           {
-            "type": "binary_expression",
-            "named": true
-          },
-          {
-            "type": "call_expression",
-            "named": true
-          },
-          {
-            "type": "color_value",
-            "named": true
-          },
-          {
-            "type": "float_value",
-            "named": true
-          },
-          {
             "type": "important",
             "named": true
           },
           {
-            "type": "integer_value",
-            "named": true
-          },
-          {
-            "type": "parenthesized_value",
-            "named": true
-          },
-          {
-            "type": "plain_value",
-            "named": true
-          },
-          {
-            "type": "string_value",
-            "named": true
-          },
-          {
-            "type": "variable_value",
+            "type": "value_",
             "named": true
           }
         ]
@@ -1220,6 +980,10 @@
         },
         {
           "type": "plain_value",
+          "named": true
+        },
+        {
+          "type": "plain_value_",
           "named": true
         },
         {
@@ -1305,27 +1069,7 @@
       "required": true,
       "types": [
         {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "call_expression",
-          "named": true
-        },
-        {
-          "type": "color_value",
-          "named": true
-        },
-        {
           "type": "enclosed_body",
-          "named": true
-        },
-        {
-          "type": "float_value",
-          "named": true
-        },
-        {
-          "type": "integer_value",
           "named": true
         },
         {
@@ -1333,23 +1077,11 @@
           "named": true
         },
         {
-          "type": "parenthesized_value",
-          "named": true
-        },
-        {
-          "type": "plain_value",
-          "named": true
-        },
-        {
-          "type": "string_value",
-          "named": true
-        },
-        {
           "type": "value",
           "named": true
         },
         {
-          "type": "variable_value",
+          "type": "value_",
           "named": true
         }
       ]
@@ -1418,39 +1150,7 @@
       "required": true,
       "types": [
         {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "call_expression",
-          "named": true
-        },
-        {
-          "type": "color_value",
-          "named": true
-        },
-        {
-          "type": "float_value",
-          "named": true
-        },
-        {
-          "type": "integer_value",
-          "named": true
-        },
-        {
-          "type": "parenthesized_value",
-          "named": true
-        },
-        {
-          "type": "plain_value",
-          "named": true
-        },
-        {
-          "type": "string_value",
-          "named": true
-        },
-        {
-          "type": "variable_value",
+          "type": "value_",
           "named": true
         }
       ]
@@ -1465,43 +1165,11 @@
       "required": true,
       "types": [
         {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "call_expression",
-          "named": true
-        },
-        {
           "type": "class_selector",
           "named": true
         },
         {
-          "type": "color_value",
-          "named": true
-        },
-        {
-          "type": "float_value",
-          "named": true
-        },
-        {
-          "type": "integer_value",
-          "named": true
-        },
-        {
-          "type": "parenthesized_value",
-          "named": true
-        },
-        {
-          "type": "plain_value",
-          "named": true
-        },
-        {
-          "type": "string_value",
-          "named": true
-        },
-        {
-          "type": "variable_value",
+          "type": "value_",
           "named": true
         }
       ]
@@ -1516,43 +1184,11 @@
       "required": true,
       "types": [
         {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "call_expression",
-          "named": true
-        },
-        {
-          "type": "color_value",
-          "named": true
-        },
-        {
           "type": "feature_name",
           "named": true
         },
         {
-          "type": "float_value",
-          "named": true
-        },
-        {
-          "type": "integer_value",
-          "named": true
-        },
-        {
-          "type": "parenthesized_value",
-          "named": true
-        },
-        {
-          "type": "plain_value",
-          "named": true
-        },
-        {
-          "type": "string_value",
-          "named": true
-        },
-        {
-          "type": "variable_value",
+          "type": "value_",
           "named": true
         }
       ]
@@ -1609,39 +1245,7 @@
       "required": true,
       "types": [
         {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "call_expression",
-          "named": true
-        },
-        {
-          "type": "color_value",
-          "named": true
-        },
-        {
-          "type": "float_value",
-          "named": true
-        },
-        {
-          "type": "integer_value",
-          "named": true
-        },
-        {
-          "type": "parenthesized_value",
-          "named": true
-        },
-        {
-          "type": "plain_value",
-          "named": true
-        },
-        {
-          "type": "string_value",
-          "named": true
-        },
-        {
-          "type": "variable_value",
+          "type": "value_",
           "named": true
         }
       ]
@@ -1681,6 +1285,10 @@
         },
         {
           "type": "plain_value",
+          "named": true
+        },
+        {
+          "type": "plain_value_",
           "named": true
         },
         {
@@ -1848,31 +1456,11 @@
       "required": true,
       "types": [
         {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
           "type": "binary_query",
           "named": true
         },
         {
-          "type": "call_expression",
-          "named": true
-        },
-        {
-          "type": "color_value",
-          "named": true
-        },
-        {
           "type": "feature_query",
-          "named": true
-        },
-        {
-          "type": "float_value",
-          "named": true
-        },
-        {
-          "type": "integer_value",
           "named": true
         },
         {
@@ -1884,19 +1472,7 @@
           "named": true
         },
         {
-          "type": "parenthesized_value",
-          "named": true
-        },
-        {
-          "type": "plain_value",
-          "named": true
-        },
-        {
           "type": "selector_query",
-          "named": true
-        },
-        {
-          "type": "string_value",
           "named": true
         },
         {
@@ -1904,7 +1480,7 @@
           "named": true
         },
         {
-          "type": "variable_value",
+          "type": "value_",
           "named": true
         }
       ]
@@ -2155,39 +1731,7 @@
       "required": true,
       "types": [
         {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "call_expression",
-          "named": true
-        },
-        {
-          "type": "color_value",
-          "named": true
-        },
-        {
-          "type": "float_value",
-          "named": true
-        },
-        {
-          "type": "integer_value",
-          "named": true
-        },
-        {
-          "type": "parenthesized_value",
-          "named": true
-        },
-        {
-          "type": "plain_value",
-          "named": true
-        },
-        {
-          "type": "string_value",
-          "named": true
-        },
-        {
-          "type": "variable_value",
+          "type": "value_",
           "named": true
         }
       ]
@@ -2376,39 +1920,7 @@
       "required": true,
       "types": [
         {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "call_expression",
-          "named": true
-        },
-        {
-          "type": "color_value",
-          "named": true
-        },
-        {
-          "type": "float_value",
-          "named": true
-        },
-        {
-          "type": "integer_value",
-          "named": true
-        },
-        {
-          "type": "parenthesized_value",
-          "named": true
-        },
-        {
-          "type": "plain_value",
-          "named": true
-        },
-        {
-          "type": "string_value",
-          "named": true
-        },
-        {
-          "type": "variable_value",
+          "type": "value_",
           "named": true
         }
       ]
@@ -2715,6 +2227,10 @@
           "named": true
         },
         {
+          "type": "plain_value_",
+          "named": true
+        },
+        {
           "type": "string_value",
           "named": true
         },
@@ -2774,46 +2290,14 @@
       "required": true,
       "types": [
         {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "call_expression",
-          "named": true
-        },
-        {
-          "type": "color_value",
-          "named": true
-        },
-        {
-          "type": "float_value",
-          "named": true
-        },
-        {
-          "type": "integer_value",
-          "named": true
-        },
-        {
-          "type": "parenthesized_value",
-          "named": true
-        },
-        {
-          "type": "plain_value",
-          "named": true
-        },
-        {
-          "type": "string_value",
-          "named": true
-        },
-        {
-          "type": "variable_value",
+          "type": "value_",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "warn_statement",
+    "type": "value_",
     "named": true,
     "fields": {},
     "children": {
@@ -2849,11 +2333,30 @@
           "named": true
         },
         {
+          "type": "plain_value_",
+          "named": true
+        },
+        {
           "type": "string_value",
           "named": true
         },
         {
           "type": "variable_value",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "warn_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "value_",
           "named": true
         }
       ]
@@ -2868,43 +2371,11 @@
       "required": true,
       "types": [
         {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "call_expression",
-          "named": true
-        },
-        {
-          "type": "color_value",
-          "named": true
-        },
-        {
           "type": "enclosed_body",
           "named": true
         },
         {
-          "type": "float_value",
-          "named": true
-        },
-        {
-          "type": "integer_value",
-          "named": true
-        },
-        {
-          "type": "parenthesized_value",
-          "named": true
-        },
-        {
-          "type": "plain_value",
-          "named": true
-        },
-        {
-          "type": "string_value",
-          "named": true
-        },
-        {
-          "type": "variable_value",
+          "type": "value_",
           "named": true
         }
       ]
@@ -3196,6 +2667,10 @@
   },
   {
     "type": "plain_value",
+    "named": true
+  },
+  {
+    "type": "plain_value_",
     "named": true
   },
   {
