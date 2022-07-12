@@ -229,7 +229,12 @@ module.exports = grammar({
       ),
 
     pseudo_element_selector: ($) =>
-      seq(optional($._selector), "::", alias($.identifier, $.tag_name)),
+      seq(
+        optional($._selector),
+        "::",
+        alias($.identifier, $.tag_name),
+        optional(alias($.pseudo_element_arguments, $.arguments))
+      ),
 
     id_selector: ($) => seq(optional($._selector), "#", alias($.identifier, $.id_name)),
 
@@ -252,6 +257,12 @@ module.exports = grammar({
 
     pseudo_class_arguments: ($) =>
       seq(token.immediate("("), sep(",", choice($._selector, repeat1($._value))), ")"),
+
+    pseudo_element_arguments: $ => seq(
+      token.immediate('('),
+      sep(',', choice($._selector, repeat1($._value))),
+      ')'
+    ),
 
     // Declarations
 
