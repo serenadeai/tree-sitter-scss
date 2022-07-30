@@ -36,6 +36,10 @@
           "named": true
         },
         {
+          "type": "placeholder_selector",
+          "named": true
+        },
+        {
           "type": "pseudo_class_selector",
           "named": true
         },
@@ -240,6 +244,10 @@
           "named": true
         },
         {
+          "type": "placeholder_selector",
+          "named": true
+        },
+        {
           "type": "plain_value",
           "named": true
         },
@@ -430,6 +438,10 @@
         },
         {
           "type": "parenthesized_value",
+          "named": true
+        },
+        {
+          "type": "placeholder_selector",
           "named": true
         },
         {
@@ -751,6 +763,10 @@
           "named": true
         },
         {
+          "type": "placeholder_selector",
+          "named": true
+        },
+        {
           "type": "pseudo_class_selector",
           "named": true
         },
@@ -815,6 +831,10 @@
         },
         {
           "type": "nesting_selector",
+          "named": true
+        },
+        {
+          "type": "placeholder_selector",
           "named": true
         },
         {
@@ -1086,6 +1106,10 @@
           "named": true
         },
         {
+          "type": "placeholder_selector",
+          "named": true
+        },
+        {
           "type": "pseudo_class_selector",
           "named": true
         },
@@ -1286,6 +1310,10 @@
         },
         {
           "type": "parenthesized_value",
+          "named": true
+        },
+        {
+          "type": "placeholder_selector",
           "named": true
         },
         {
@@ -1551,6 +1579,10 @@
         },
         {
           "type": "nesting_selector",
+          "named": true
+        },
+        {
+          "type": "placeholder_selector",
           "named": true
         },
         {
@@ -1998,19 +2030,15 @@
     }
   },
   {
-    "type": "placeholder",
+    "type": "placeholder_selector",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
-          "type": "block",
-          "named": true
-        },
-        {
-          "type": "name",
+          "type": "placeholder_name",
           "named": true
         }
       ]
@@ -2058,6 +2086,10 @@
         },
         {
           "type": "nesting_selector",
+          "named": true
+        },
+        {
+          "type": "placeholder_selector",
           "named": true
         },
         {
@@ -2121,6 +2153,10 @@
         },
         {
           "type": "nesting_selector",
+          "named": true
+        },
+        {
+          "type": "placeholder_selector",
           "named": true
         },
         {
@@ -2253,6 +2289,10 @@
           "named": true
         },
         {
+          "type": "placeholder_selector",
+          "named": true
+        },
+        {
           "type": "pseudo_class_selector",
           "named": true
         },
@@ -2316,6 +2356,10 @@
           "named": true
         },
         {
+          "type": "placeholder_selector",
+          "named": true
+        },
+        {
           "type": "pseudo_class_selector",
           "named": true
         },
@@ -2376,6 +2420,10 @@
         },
         {
           "type": "nesting_selector",
+          "named": true
+        },
+        {
+          "type": "placeholder_selector",
           "named": true
         },
         {
@@ -2479,10 +2527,6 @@
         },
         {
           "type": "namespace_statement",
-          "named": true
-        },
-        {
-          "type": "placeholder",
           "named": true
         },
         {
@@ -3062,6 +3106,10 @@
   {
     "type": "or",
     "named": false
+  },
+  {
+    "type": "placeholder_name",
+    "named": true
   },
   {
     "type": "plain_value",

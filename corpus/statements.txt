@@ -239,6 +239,7 @@ Extend statements
   .bar {
     @extend blue;
     @extend .green;
+    @extend %white;
   }
 }
 
@@ -252,7 +253,8 @@ Extend statements
       (rule_set 
         (selectors (class_selector (class_name)))
         (block (extend_statement (plain_value)) 
-          (extend_statement (class_selector (class_name)))))))) 
+          (extend_statement (class_selector (class_name)))
+          (extend_statement (placeholder_selector (placeholder_name))))))))
 
 ==============================
 Apply statements

@@ -35,8 +35,7 @@ module.exports = grammar({
         $.error_statement,
         $.warn_statement,
         $.debug_statement,
-        $.at_rule,
-        $.placeholder
+        $.at_rule
       ),
 
     // Statements
@@ -111,9 +110,7 @@ module.exports = grammar({
         alias($._value, $.argument_value)
       ),
 
-    placeholder: ($) => seq("%", alias($.identifier, $.name), $.block),
-
-    extend_statement: ($) => seq("@extend", choice($._value, $.class_selector), ";"),
+    extend_statement: ($) => seq("@extend", choice($._value, $.class_selector, $.placeholder_selector), ";"),
 
     if_statement: ($) => seq($.if_clause, repeat($.else_if_clause), optional($.else_clause)),
 
@@ -210,7 +207,8 @@ module.exports = grammar({
         $.child_selector,
         $.descendant_selector,
         $.sibling_selector,
-        $.adjacent_sibling_selector
+        $.adjacent_sibling_selector,
+        $.placeholder_selector
       ),
 
     nesting_selector: ($) => "&",
@@ -219,6 +217,8 @@ module.exports = grammar({
 
     class_selector: ($) =>
       prec(1, seq(optional($._selector), choice(".", $.nesting_selector), alias($.identifier, $.class_name))),
+
+    placeholder_selector: ($) => seq("%", alias($.identifier, $.placeholder_name)),
 
     pseudo_class_selector: ($) =>
       seq(
