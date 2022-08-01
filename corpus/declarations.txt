@@ -350,10 +350,11 @@ Placeholders
 ---
 
 (stylesheet
-  (placeholder
-    (name)
-    (block
-      (declaration (property_name) (integer_value (unit))))))
+  (rule_set
+    (selectors
+      (placeholder_selector (placeholder_name)))
+      (block
+        (declaration (property_name) (integer_value (unit))))))
 
 =============================================
 Spaces after colons in property declarations
