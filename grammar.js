@@ -15,6 +15,7 @@ module.exports = grammar({
     _top_level_item: ($) =>
       choice(
         $.declaration,
+        $.map_declaration,
         $.rule_set,
         $.import_statement,
         $.media_statement,
@@ -171,6 +172,7 @@ module.exports = grammar({
     _block_item: ($) =>
       choice(
         $.declaration,
+        $.map_declaration,
         $.rule_set,
         $.import_statement,
         $.media_statement,
@@ -265,6 +267,27 @@ module.exports = grammar({
         ";"
       ),
 
+    map_declaration: ($) => seq(
+      choice(alias($.variable_identifier, $.variable_name), alias(choice($.identifier, $.string_value), $.map_key)),
+      ": (",
+      alias(
+        repeat(
+          choice(
+            seq(
+              alias(choice($.identifier, $.integer_value, $.string_value), $.map_key),
+              ":",
+              $._value,
+              optional(",")
+            ),
+            seq($.map_declaration, optional(","))
+          )
+        ),
+        $.map_value,
+      ),
+      ")",
+      optional(";"),
+    ),
+
     last_declaration: ($) =>
       prec(
         1,
@@ -317,7 +340,7 @@ module.exports = grammar({
           $.string_value,
           $.binary_expression,
           $.parenthesized_value,
-          $.call_expression
+          $.call_expression,
         )
       ),
 
@@ -349,6 +372,7 @@ module.exports = grammar({
     unit: ($) => token.immediate(/[a-zA-Z%]+/),
 
     call_expression: ($) => seq(alias($.identifier, $.function_name), $.arguments),
+
 
     binary_expression: ($) =>
       prec.left(
