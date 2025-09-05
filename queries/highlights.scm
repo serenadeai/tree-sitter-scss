@@ -54,6 +54,7 @@
 
 (string_value) @string
 (color_value) @string.special
+(map_key) @string
 
 (integer_value) @number
 (float_value) @number

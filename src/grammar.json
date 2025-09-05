@@ -17,6 +17,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "map_declaration"
+        },
+        {
+          "type": "SYMBOL",
           "name": "rule_set"
         },
         {
@@ -1179,6 +1183,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "map_declaration"
+        },
+        {
+          "type": "SYMBOL",
           "name": "rule_set"
         },
         {
@@ -1793,6 +1801,144 @@
         {
           "type": "STRING",
           "value": ";"
+        }
+      ]
+    },
+    "map_declaration": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "variable_identifier"
+              },
+              "named": true,
+              "value": "variable_name"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "identifier"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "string_value"
+                  }
+                ]
+              },
+              "named": true,
+              "value": "map_key"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ": ("
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "REPEAT",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "CHOICE",
+                        "members": [
+                          {
+                            "type": "SYMBOL",
+                            "name": "identifier"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "integer_value"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "string_value"
+                          }
+                        ]
+                      },
+                      "named": true,
+                      "value": "map_key"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": ":"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "_value"
+                    },
+                    {
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "STRING",
+                          "value": ","
+                        },
+                        {
+                          "type": "BLANK"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "map_declaration"
+                    },
+                    {
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "STRING",
+                          "value": ","
+                        },
+                        {
+                          "type": "BLANK"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "named": true,
+          "value": "map_value"
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": ";"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },

@@ -377,3 +377,217 @@ div {
       (declaration
         (property_name)
         (integer_value)))))
+
+=============================================
+Map - Empty
+=============================================
+
+$map: ();
+
+---
+
+(stylesheet
+  (map_declaration (variable_name)))
+
+=============================================
+Map - Basic
+=============================================
+
+$map1: (
+  string: "string",
+  color: #fff,
+  variable: $variable
+);
+$map2: (
+  'string': "string",
+  'color': #fff,
+  'variable': $variable
+);
+$map3: (
+  "string": "string",
+  "color": #fff,
+  "variable": $variable
+);
+
+---
+
+(stylesheet
+  (map_declaration (variable_name)
+    (map_value
+      (map_key)
+      (string_value)
+      (map_key)
+      (color_value)
+      (map_key)
+      (variable_value)))
+  (map_declaration (variable_name)
+    (map_value
+      (map_key)
+      (string_value)
+      (map_key)
+      (color_value)
+      (map_key)
+      (variable_value)))
+  (map_declaration (variable_name)
+    (map_value
+      (map_key)
+      (string_value)
+      (map_key)
+      (color_value)
+      (map_key)
+      (variable_value))))
+
+=============================================
+Map - Into Map
+=============================================
+
+$map: (
+  map1: (
+    map11: (
+      map111: (
+        foo: $foo,
+        'foo': 'bar',
+        "foo": "bar"
+      ),
+      map112: (
+        foo: $foo,
+        'foo': 'bar',
+        "foo": "bar"
+      ),
+    ),
+    map12: (
+      map121: (
+        foo: $foo,
+        'foo': 'bar',
+        "foo": "bar"
+      ),
+      map122: (
+        foo: $foo,
+        'foo': 'bar',
+        "foo": "bar"
+      ),
+    ),
+  ),
+  map2: (
+    map21: (
+      map211: (
+        foo: $foo,
+        'foo': 'bar',
+        "foo": "bar"
+      ),
+      map212: (
+        foo: $foo,
+        'foo': 'bar',
+        "foo": "bar"
+      ),
+    ),
+    map22: (
+      map221: (
+        foo: $foo,
+        'foo': 'bar',
+        "foo": "bar"
+      ),
+      map222: (
+        foo: $foo,
+        'foo': 'bar',
+        "foo": "bar"
+      ),
+    ),
+  ),
+);
+
+---
+
+(stylesheet
+  (map_declaration (variable_name)
+    (map_value
+      (map_declaration
+        (map_key)
+        (map_value
+          (map_declaration
+            (map_key)
+            (map_value
+              (map_declaration
+                (map_key)
+                (map_value
+                  (map_key)
+                  (variable_value)
+                  (map_key)
+                  (string_value)
+                  (map_key)
+                  (string_value)))
+              (map_declaration
+                (map_key)
+                (map_value
+                  (map_key)
+                  (variable_value)
+                  (map_key)
+                  (string_value)
+                  (map_key)
+                  (string_value)))))
+          (map_declaration
+            (map_key)
+            (map_value
+              (map_declaration
+                (map_key)
+                (map_value
+                  (map_key)
+                  (variable_value)
+                  (map_key)
+                  (string_value)
+                  (map_key)
+                  (string_value)))
+              (map_declaration
+                (map_key)
+                (map_value
+                  (map_key)
+                  (variable_value)
+                  (map_key)
+                  (string_value)
+                  (map_key)
+                  (string_value)))))))
+      (map_declaration
+        (map_key)
+        (map_value
+          (map_declaration
+            (map_key)
+            (map_value
+              (map_declaration
+                (map_key)
+                (map_value
+                  (map_key)
+                  (variable_value)
+                  (map_key)
+                  (string_value)
+                  (map_key)
+                  (string_value)))
+              (map_declaration
+                (map_key)
+                (map_value
+                  (map_key)
+                  (variable_value)
+                  (map_key)
+                  (string_value)
+                  (map_key)
+                  (string_value)))))
+          (map_declaration
+            (map_key)
+            (map_value
+              (map_declaration
+                (map_key)
+                (map_value
+                  (map_key)
+                  (variable_value)
+                  (map_key)
+                  (string_value)
+                  (map_key)
+                  (string_value)))
+              (map_declaration
+                (map_key)
+                (map_value
+                  (map_key)
+                  (variable_value)
+                  (map_key)
+                  (string_value)
+                  (map_key)
+                  (string_value))))))))))
